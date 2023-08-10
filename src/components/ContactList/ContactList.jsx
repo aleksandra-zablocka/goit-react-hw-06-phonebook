@@ -1,39 +1,44 @@
-import React, { useState } from 'react';
-import ContactEl from 'components/ContactEl/ContactEl';
+// import React, { useState } from 'react';
 import css from './ContactList.module.css';
-import Filter from 'components/Filter/Filter';
+// import Filter from 'components/Filter/Filter';
 
-const ContactList = ({ contacts, deleteContact }) => {
-  const [filter, setFilter] = useState('');
+import { useSelector } from 'react-redux';
+import getContacts from 'redux/selectors';
+import ContactEl from 'components/ContactEl/ContactEl';
+import statusFilters from 'redux/const';
+import Favorites from 'components/Favorites/Favorites';
 
-  const filterContacts = (contacts, filter) => {
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
+const getFiltersContacts = (contacts, statusFilters) => {
+  const filter = {
+    favorite: contact => contact.filter(contact => contact.favorite),
+    all: contact => contact,
   };
 
-  const filteredContacts = filterContacts(contacts, filter);
+  const filterFn = filter[statusFilters] || filter['all'];
+  return filterFn(contacts);
+};
+
+const ContactList = () => {
+  const contacts = useSelector(getContacts);
+  const statusFilters = useSelector(state => state.filter.status);
+  const filterContacts = getFiltersContacts(contacts, statusFilters);
 
   return (
-    <div className={css.contactList}>
-      <h2>Contacts</h2>
-      <Filter onFilterChange={setFilter} filter={filter} />
-      <p className={css.label}>Name, number</p>
-      {filteredContacts.length > 0 ? (
-        <ul>
-          {filteredContacts.map(contact => (
-            <ContactEl
-              key={contact.id}
-              contact={contact}
-              deleteContact={deleteContact}
-            />
-          ))}
-        </ul>
+    <div>
+      {contacts.length > 0 ? (
+        <div className={css.contactList}>
+          <h2>Contact List</h2>
+          <Favorites />
+          <ul>
+            {filterContacts.map(contact => (
+              <ContactEl key={contact.id} contact={contact} />
+            ))}
+          </ul>
+        </div>
       ) : (
-        <p className={css.noContacts}>No contacts available</p>
+        <div className={css.noContacts}>No contacts available</div>
       )}
     </div>
   );
 };
-
 export default ContactList;

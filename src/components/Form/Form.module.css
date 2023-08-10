@@ -1,42 +1,41 @@
-.phonebook {
-  width: 300px;
-  padding-top: 80px;
+.form {
+  gap: 10px;
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.form {
-  gap: 2px;
-  font-size: 15px;
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.515);
-  /* margin: 10px; */
+  background-color: rgba(255, 255, 255, 0.9);
+  margin: 20px auto;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
 
 .input {
-  max-width: 180px;
-  margin-bottom: 3px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
 }
 
 .submitBtn {
-  font-size: 13px;
-  color: black;
-  background-color: #f2f2f2;
-  margin-top: 10px;
-  width: 120px;
-  border: 1px solid rgb(94, 42, 42);
+  font-size: 14px;
+  border-radius: 10px;
+  color: white;
+  /* background-color: #f08080; */
+  background-color: #6a7dfbdf;
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
   cursor: pointer;
-  /* background-color: transparent; */
-  transition: box-shadow 300ms;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .submitBtn:hover {
-  color: black;
-  background-color: #f2f2f2;
-  box-shadow: rgba(128, 79, 70, 0.378) 0px 2px 5px 0px;
-  border: 1px solid rgb(48, 21, 21);
+  /* background-color: #e65c5c; */
+  background-color: #485ff6df;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
 }
+
