@@ -1,5 +1,4 @@
 import css from './ContactEl.module.css';
-
 import { useDispatch } from "react-redux";
 import { removeContact, toggleFavorite } from "redux/actions";
 

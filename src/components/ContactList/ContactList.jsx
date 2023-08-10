@@ -1,11 +1,10 @@
-// import React, { useState } from 'react';
 import css from './ContactList.module.css';
 // import Filter from 'components/Filter/Filter';
 
 import { useSelector } from 'react-redux';
 import getContacts from 'redux/selectors';
 import ContactEl from 'components/ContactEl/ContactEl';
-import statusFilters from 'redux/const';
+// import statusFilters from 'redux/const';
 import Favorites from 'components/Favorites/Favorites';
 
 const getFiltersContacts = (contacts, statusFilters) => {
