@@ -2,6 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   addContact,
   removeContact,
+  setFilter,
   setStatusFilter,
   toggleFavorite,
 } from './actions';
@@ -22,7 +23,15 @@ const contactsInitial = [
   },
 ];
 
-export const contactsReducer = createReducer(contactsInitial, {
+const initialState = {
+  // contacts: [],
+  contacts: contactsInitial,
+  filter: '',
+};
+
+// przy oddawaniu finalnej wersji pracy domowej zamienic contacts na pustą tablicę - teraz jest contactsInitial, żeby testować czy apka działa
+
+export const contactsReducer = createReducer(initialState.contacts, {
   [addContact]: (state, action) => {
     return [...state, action.payload];
   },
@@ -36,6 +45,12 @@ export const contactsReducer = createReducer(contactsInitial, {
       }
       return { ...contact, favorite: !contact.favorite };
     });
+  },
+  [setFilter]: (state, action) => {
+    return {
+      ...state,
+      filter: action.payload,
+    };
   },
 });
 

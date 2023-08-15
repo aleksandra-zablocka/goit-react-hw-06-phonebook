@@ -16,3 +16,5 @@ export const removeContact = createAction('contacts/REMOVE');
 export const setStatusFilter = createAction('filters/SET');
 
 export const toggleFavorite = createAction('contacts/FAVORITE');
+
+export const setFilter = createAction('contacts/SET_FILTER');

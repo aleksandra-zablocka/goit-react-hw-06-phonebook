@@ -13,9 +13,9 @@
 }
 
 .input {
+  text-align: center;
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
   border-radius: 10px;
   border: 1px solid #ccc;
 }
@@ -24,9 +24,8 @@
   font-size: 14px;
   border-radius: 10px;
   color: white;
-  /* background-color: #f08080; */
   background-color: #6a7dfbdf;
-  margin-top: 15px;
+  margin-top: 10px;
   padding: 10px 20px;
   border: none;
   cursor: pointer;
@@ -34,8 +33,6 @@
 }
 
 .submitBtn:hover {
-  /* background-color: #e65c5c; */
   background-color: #485ff6df;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
 }
-

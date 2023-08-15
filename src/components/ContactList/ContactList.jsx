@@ -1,9 +1,6 @@
-// import Filter from 'components/Filter/Filter';
-// import getContacts from 'redux/selectors';
-// import statusFilters from 'redux/const';
-
 import css from './ContactList.module.css';
 import { useSelector } from 'react-redux';
+import Filter from 'components/Filter/Filter';
 import ContactEl from 'components/ContactEl/ContactEl';
 import Favorites from 'components/Favorites/Favorites';
 
@@ -21,14 +18,14 @@ export const ContactList = () => {
   const contacts = useSelector(state => state.contacts);
   const statusFilters = useSelector(state => state.filters.status);
   const filterContacts = getFiltersContacts(contacts, statusFilters);
-  
+
   return (
     <div>
-      {/* {contacts.length > 0 ? ( */}
       <div className={css.contactList}>
         <h2>Contact List</h2>
-        <Favorites />
         <ul>
+          <Filter />
+          <Favorites />
           {filterContacts.length > 0 ? (
             filterContacts.map(contact => (
               <ContactEl key={contact.id} contact={contact} />

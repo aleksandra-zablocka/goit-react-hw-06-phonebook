@@ -1,22 +1,27 @@
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setFilter } from 'redux/actions';
 import css from './Filter.module.css';
 
-const Filter = ({onFilterChange, filter}) => {
+const Filter = () => {
+const filter = useSelector(state => state.filter);
+const dispatch = useDispatch();
 
-   const handleChange = event => {
-    const {value} = event.target;
-    onFilterChange(value);
-  }
+  const handleChange = event => {
+    const { value } = event.target;
+    dispatch(setFilter(value));
+  };
 
   return (
     <div className={css.filter}>
-    <label htmlFor='filter'>Please type a name</label>
-    <input
-      type="text"
-      name="filter"
-      value={filter}
-      onChange={handleChange}
-      placeholder="Search for contacts"
-    />
+      <input
+        className={css.inputFilter}
+        type="text"
+        name="filter"
+        value={filter}
+        onChange={handleChange}
+        placeholder="Search for contacts"
+      />
     </div>
   );
 };
