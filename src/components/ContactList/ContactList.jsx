@@ -1,10 +1,10 @@
-import css from './ContactList.module.css';
 // import Filter from 'components/Filter/Filter';
-
-import { useSelector } from 'react-redux';
-import getContacts from 'redux/selectors';
-import ContactEl from 'components/ContactEl/ContactEl';
+// import getContacts from 'redux/selectors';
 // import statusFilters from 'redux/const';
+
+import css from './ContactList.module.css';
+import { useSelector } from 'react-redux';
+import ContactEl from 'components/ContactEl/ContactEl';
 import Favorites from 'components/Favorites/Favorites';
 
 const getFiltersContacts = (contacts, statusFilters) => {
@@ -17,27 +17,33 @@ const getFiltersContacts = (contacts, statusFilters) => {
   return filterFn(contacts);
 };
 
-const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const statusFilters = useSelector(state => state.filter.status);
+export const ContactList = () => {
+  const contacts = useSelector(state => state.contacts);
+  const statusFilters = useSelector(state => state.filters.status);
   const filterContacts = getFiltersContacts(contacts, statusFilters);
-
+  
   return (
     <div>
-      {contacts.length > 0 ? (
-        <div className={css.contactList}>
-          <h2>Contact List</h2>
-          <Favorites />
-          <ul>
-            {filterContacts.map(contact => (
+      {/* {contacts.length > 0 ? ( */}
+      <div className={css.contactList}>
+        <h2>Contact List</h2>
+        <Favorites />
+        <ul>
+          {filterContacts.length > 0 ? (
+            filterContacts.map(contact => (
               <ContactEl key={contact.id} contact={contact} />
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <div className={css.noContacts}>No contacts available</div>
-      )}
+            ))
+          ) : (
+            <div className={css.noContacts}>
+              {statusFilters === 'favorite'
+                ? 'No favorite contacts'
+                : 'No contacts available'}
+            </div>
+          )}
+        </ul>
+      </div>
     </div>
   );
 };
+
 export default ContactList;

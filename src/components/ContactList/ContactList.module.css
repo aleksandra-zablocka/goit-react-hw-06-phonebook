@@ -1,7 +1,6 @@
 .contactList {
-    display: flex;
-    margin: 20px;
-  /* margin: 20px; */
+  display: flex;
+  margin: 20px;
   flex-direction: column;
   align-items: center;
 }
@@ -12,6 +11,7 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: rgba(255, 255, 255, 0.9);
   margin: 20px auto;
   padding: 20px;
@@ -21,9 +21,5 @@ ul {
 }
 
 .noContacts {
-  border-radius: 10px;
   font-size: 12px;
-  background-color: rgba(255, 255, 255, 0.9);
-  margin: 10px;
-  padding: 20px;
 }

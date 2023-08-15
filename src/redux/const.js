@@ -1,6 +1,6 @@
-const statusFilters = Object.freeze({
+export const statusFilters = Object.freeze({
   all: 'all',
   favorite: 'favorite',
 });
 
-export default statusFilters;
+

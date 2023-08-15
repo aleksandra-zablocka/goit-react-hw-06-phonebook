@@ -5,13 +5,10 @@ import css from './App.module.css';
 export default function App() {
   return (
     <div className={css.container}>
-    <div className={css.phoneBook}>
-      <Form/>
-      <ContactList/>
+      <div className={css.phoneBook}>
+        <Form />
+        <ContactList />
+      </div>
     </div>
-    </div>
-  )
+  );
 }
-
-
-

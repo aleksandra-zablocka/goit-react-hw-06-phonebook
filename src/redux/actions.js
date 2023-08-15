@@ -1,8 +1,7 @@
-import { nanoid } from 'nanoid';
+import { createAction, nanoid } from '@reduxjs/toolkit';
 
-export const addContact = (name, number) => {
+export const addContact = createAction('contacts/ADD', (name, number) => {
   return {
-    type: 'contacts/ADD',
     payload: {
       id: nanoid(),
       name,
@@ -10,25 +9,10 @@ export const addContact = (name, number) => {
       favorite: false,
     },
   };
-};
+});
 
-export const removeContact = id => {
-  return {
-    type: 'contacts/REMOVE',
-    payload: id,
-  };
-};
+export const removeContact = createAction('contacts/REMOVE');
 
-export const toggleFavorite = id => {
-  return {
-    type: 'contacts/FAVORITE',
-    payload: id,
-  };
-};
+export const setStatusFilter = createAction('filters/SET');
 
-export const setStatusFilter = (status) => {
-  return {
-    type: 'filters/SET',
-    payload: status
-  }
-}
+export const toggleFavorite = createAction('contacts/FAVORITE');
