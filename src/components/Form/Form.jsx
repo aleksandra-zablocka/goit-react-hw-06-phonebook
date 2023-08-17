@@ -1,7 +1,7 @@
 import css from './Form.module.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/actions';
+import { addContact } from 'redux/contactsSlice';
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -13,36 +13,45 @@ const Form = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const form = event.target;
-    dispatch(addContact(contact.name, contact.number));
-    form.reset();
+
+    if (contact.name && contact.number) {
+      dispatch(addContact({ name: contact.name, number: contact.number }));
+      setContact({ name: '', number: '' });
+    }
   };
 
   const handleChangeInput = e => {
+    const { name, value } = e.target;
     setContact(prevState => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
   return (
     <div>
       <h2>Phonebook</h2>
-    <form onSubmit={handleSubmit} className={css.form}>
-      <input className={css.input}
-        type="text"
-        name="name"
-        placeholder="Name"
-        onChange={handleChangeInput}
-      />
-      <input className={css.input}
-        type="tel"
-        name="number"
-        placeholder="Number"
-        onChange={handleChangeInput}
-      />
-      <button className={css.submitBtn} type="submit">Add contact</button>
-    </form>
+      <form onSubmit={handleSubmit} className={css.form}>
+        <input
+          className={css.input}
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={contact.name}
+          onChange={handleChangeInput}
+        />
+        <input
+          className={css.input}
+          type="tel"
+          name="number"
+          placeholder="Number"
+          value={contact.number}
+          onChange={handleChangeInput}
+        />
+        <button className={css.submitBtn} type="submit">
+          Add contact
+        </button>
+      </form>
     </div>
   );
 };

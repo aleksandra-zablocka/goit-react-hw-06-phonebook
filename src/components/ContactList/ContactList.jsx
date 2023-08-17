@@ -1,23 +1,23 @@
 import css from './ContactList.module.css';
 import { useSelector } from 'react-redux';
+import { getContacts, getFilter } from 'redux/selectors';
 import Filter from 'components/Filter/Filter';
 import ContactEl from 'components/ContactEl/ContactEl';
-import Favorites from 'components/Favorites/Favorites';
-
-const getFiltersContacts = (contacts, statusFilters) => {
-  const filter = {
-    favorite: contact => contact.filter(contact => contact.favorite),
-    all: contact => contact,
-  };
-
-  const filterFn = filter[statusFilters] || filter['all'];
-  return filterFn(contacts);
-};
 
 export const ContactList = () => {
-  const contacts = useSelector(state => state.contacts);
-  const statusFilters = useSelector(state => state.filters.status);
-  const filterContacts = getFiltersContacts(contacts, statusFilters);
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
+
+  const filterContacts = () => {
+    if (filter !== '') {
+      return contacts.filter(contact =>
+        contact.name.toLowerCase().includes(filter.toLowerCase())
+      );
+    }
+    return contacts;
+  };
+
+  const filteredContacts = filterContacts();
 
   return (
     <div>
@@ -25,16 +25,13 @@ export const ContactList = () => {
         <h2>Contact List</h2>
         <ul>
           <Filter />
-          <Favorites />
-          {filterContacts.length > 0 ? (
-            filterContacts.map(contact => (
+          {filteredContacts.length > 0 ? (
+            filteredContacts.map(contact => (
               <ContactEl key={contact.id} contact={contact} />
             ))
           ) : (
             <div className={css.noContacts}>
-              {statusFilters === 'favorite'
-                ? 'No favorite contacts'
-                : 'No contacts available'}
+              No contacts available
             </div>
           )}
         </ul>

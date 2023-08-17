@@ -1,15 +1,15 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilter } from 'redux/actions';
+import { setFilter } from 'redux/filterSlice';
 import css from './Filter.module.css';
+import { getFilter } from 'redux/selectors';
 
 const Filter = () => {
-const filter = useSelector(state => state.filter);
+const filter = useSelector(getFilter);
 const dispatch = useDispatch();
 
   const handleChange = event => {
-    const { value } = event.target;
-    dispatch(setFilter(value));
+    dispatch(setFilter(event.target.value))
   };
 
   return (
@@ -19,6 +19,8 @@ const dispatch = useDispatch();
         type="text"
         name="filter"
         value={filter}
+        pattern="^[A-Za-z.'\- ]+$"
+        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         onChange={handleChange}
         placeholder="Search for contacts"
       />
